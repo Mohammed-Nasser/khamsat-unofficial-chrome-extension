@@ -26,7 +26,7 @@ setParam('canNotif','1');
 }
 var canNotif = (getParam('canNotif') == '1' ? true : false);
 var slug ="";
-var slug1 = "إيقاف التنيهات";
+var slug1 = "تشغيل التنبيهات";
 var slug2 = "تشغيل التنبيهات";
 if(canNotif){
 slug =slug1;
