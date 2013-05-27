@@ -1,7 +1,7 @@
 /*////////////////////////////////////////////////
 developed by Billal EM (https://khamsat.com/user/billal-em)
 github repo https://github.com/billal-em/khamsat-unofficial-chrome-extension
-version 1.0.0.0 26/05/2013
+version 1.0.1.0 26/05/2013
 ////////////////////////////////////////////////*/
 
 
@@ -25,7 +25,7 @@ version 1.0.0.0 26/05/2013
 		backPage = chrome.extension.getBackgroundPage();
 		items_ = backPage.items;
 		notifShowTime_ = backPage.notifShowTime;
-		//var content = document.getElementById('content');
+		
 		
 		for(var i = 0;i<items_.length;i++){
 		
@@ -36,9 +36,8 @@ version 1.0.0.0 26/05/2013
 					'+items_[i].text+ '</a>\
 					</td>\
 					</tr>\
-					</table></div>';
+					</table></div>';			
 			
-			/*res +="<div class='icon'><img src='" + items_[i].img + "'<a onclick='openWebsite(this)' href='" + items_[i].url + "'>" + items_[i].text + "</a></div>";*/
 		}
 		$('#content').html(res);
 		setTimeout(function(){

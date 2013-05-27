@@ -1,13 +1,16 @@
 /*////////////////////////////////////////////////
 developed by Billal EM (https://khamsat.com/user/billal-em)
 github repo https://github.com/billal-em/khamsat-unofficial-chrome-extension
-version 1.0.0.0 26/05/2013
+version 1.0.1.0 26/05/2013
 ////////////////////////////////////////////////*/
+
+
 var notifUrl = "https://khamsat.com/";
 var items = [];
 var notifShowTime = 25;
-var updateInterval = 15
-var doc;
+var updateInterval = 15;
+var anim = false;
+var currIconIndex = 1;
 
 function setParam(key,obj){
 localStorage[key] = obj;
@@ -54,10 +57,31 @@ function showNotification() {
 	notification.show();	
 }
 
+function startIconAnim(){
+	
+	if(!anim){
+chrome.browserAction.setIcon({path:"imgs/icon-128.png"});
+	return;
+	}
+	
+	if(currIconIndex > 3){
+		currIconIndex = 1;
+	}
+	chrome.browserAction.setIcon({path:"imgs/icon-128-u"+ currIconIndex +".png"});	
+	currIconIndex++;
+	setTimeout(startIconAnim,100);
+}
+function stopIconAnim(){
+	anim = false;
+chrome.browserAction.setIcon({path:"imgs/icon-128.png"});
+}
+
 
 function checkNotifsUpdates(nURL) {
+	anim = true;
+	startIconAnim();
 	fetchUrl(nURL, function(document) {
-		if (document) {	
+		if (document) {
 		
 		var lastNotif = getParam('lastNotif');	
 		var an = $(document).find('#forum_posts a');
@@ -65,6 +89,7 @@ function checkNotifsUpdates(nURL) {
 			setParam('lastNotif',$(an[1]).find('li').html());
 			items = [];
 		}else{
+			stopIconAnim();
 			return;
 		}
 			//parsing
@@ -75,6 +100,7 @@ function checkNotifsUpdates(nURL) {
 				img = $(an[i]).find('li')[0].style.backgroundImage.replace('url(','').replace(')','');
 				items[items.length] = {"url": u,"text": txt , "img" : img};
 			}
+			stopIconAnim();
 			if(items.length)
 			showNotification();
 		}
@@ -82,7 +108,7 @@ function checkNotifsUpdates(nURL) {
 }
 
 
-function checkAllNotifs(oneTimeOnly) {
+function checkAllNotifs(oneTime) {
 	if(getParam('canNotif') == '1'){		
 	try { 
 		
@@ -91,6 +117,7 @@ function checkAllNotifs(oneTimeOnly) {
 		console.error("@checkAllNotifs" + ex);
 	}
 	}
+	if(!oneTime)
 	setTimeout(checkAllNotifs, 1000 * updateInterval);
 }
 
