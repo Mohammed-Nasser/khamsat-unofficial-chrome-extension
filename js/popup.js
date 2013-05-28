@@ -1,7 +1,7 @@
 /*////////////////////////////////////////////////
 developed by Billal EM (https://khamsat.com/user/billal-em)
 github repo https://github.com/billal-em/khamsat-unofficial-chrome-extension
-version 1.0.1.0 26/05/2013
+version 1.0.0.0 26/05/2013
 ////////////////////////////////////////////////*/
 
 
@@ -58,14 +58,6 @@ init();
 });
 });
 
-//google-analytics
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-41255300-1']);
-_gaq.push(['_trackPageview']);
 
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = 'https://ssl.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+
 

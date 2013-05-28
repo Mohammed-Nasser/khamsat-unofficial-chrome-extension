@@ -1,7 +1,7 @@
 /*////////////////////////////////////////////////
 developed by Billal EM (https://khamsat.com/user/billal-em)
 github repo https://github.com/billal-em/khamsat-unofficial-chrome-extension
-version 1.0.1.0 26/05/2013
+version 1.0.0.0 26/05/2013
 ////////////////////////////////////////////////*/
 
 
